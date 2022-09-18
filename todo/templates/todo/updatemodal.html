@@ -1,0 +1,17 @@
+<form
+  method="POST"
+  name="todoForm"
+  value="{{ item.todo.id }}"
+  class="mt-2 border-4 p-4 bg-slate-400 text-sm md:text-lg text-white font-serif font-extralight italic max-h-fit md:min-h-[400px]"
+  action="{% url 'update' item.todo.id %}"
+>
+  {% csrf_token %} {{ item.form.as_p }}
+  <button
+    type="submit"
+    name="submit"
+    value="{{ item.todo.id }}"
+    class="btn !bg-blue-500 text-white mt-4 bg-inherit"
+  >
+    Submit
+  </button>
+</form>

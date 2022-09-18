@@ -1,0 +1,63 @@
+{% extends './base.html' %}
+{% block form %}
+    <form method="POST" name="todoForm" value="0" class="mt-2 border-4 p-4 bg-slate-400 text-sm md:text-lg text-white font-serif font-extralight italic max-h-fit md:min-h-[400px]">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="flex justify-between">
+          {% url 'table' as table %}
+          {% if request.path == table %}
+          <button type="submit" name="submit" value="" class="btn !bg-green-600 text-white mt-4 bg-inherit">Create</button>
+          {% else %}
+          <button type="submit" name="submit" value="" class="btn !bg-blue-600 text-white mt-4 bg-inherit">Update</button>
+          <a type="submit" href="{% url 'table' %}" name="submit" value="" class="btn bg-teal-400 text-white mt-4 bg-inherit mr-0">Add New</a>
+          {% endif %}
+
+
+        </div>
+    </form>
+    {% block table %}{% endblock table %}
+{% endblock form %}
+
+{% block js %}
+  <script>
+  let looks = document.querySelectorAll(".look");
+  looks.forEach((look) => {
+    look.onclick = () => {
+      let id = "l"+look.getAttribute("name");
+      let modal = document.getElementById(id);
+      document.onclick = (e) => {
+        if (e.target == modal) {
+          look.click();
+        };
+      };
+    };
+  });
+
+  let dels = document.querySelectorAll(".del");
+  dels.forEach((del) => {
+    del.onclick = () => {
+      let id = "d"+del.getAttribute("name");
+      let modal = document.getElementById(id);
+      document.onclick = (e) => {
+        if (e.target == modal) {
+          del.click();
+        };
+      };
+    };
+  });
+
+  let upds = document.querySelectorAll(".upd");
+  upds.forEach((upd) => {
+    upd.onclick = () => {
+      let id = "f"+upd.getAttribute("value");
+      let modal = document.getElementById(id);
+      document.onclick = (e) => {
+        if (e.target == modal) {
+          upd.click();
+        };
+      };
+    };
+  });
+
+  </script>
+{% endblock js %}
