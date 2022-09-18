@@ -1,7 +1,7 @@
 {% extends './form.html' %}
 {% block table %}
 <div class="mt-2 md:max-h-[420px] md:max-w-md max-h-56 overflow-auto w-fit md:ml-8">
-    {% if data %}
+    {% if datas %}
     <table class="bg-slate-400 md:min-w-full text-sm text-white font-serif font-extralight italic md:w-4/12 text-center border-collapse border border-slate-400 w-full">
         <thead>
             <tr>
@@ -15,32 +15,23 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in data %}
+            {% for data in datas %}
                 <tr>
                     <td class="border-collapse border border-slate-400 px-1">{{ forloop.counter }}</td>
-                    <td class="border-collapse border border-slate-400 px-1">{{ item.todo.title }}</td>
+                    <td class="border-collapse border border-slate-400 px-1">{{ data.todo.title }}</td>
                     <td class="border-collapse border border-slate-400 px-1">
-                        <button class="btn look" data-modal-toggle="l{{ item.todo.id }}" name="{{ item.todo.id }}">👀</button>
+                        <button data-modal-toggle="l{{ data.todo.id }}" class="btn look"  name="{{ data.todo.id }}">👀</button>
                         {% include './lookmodal.html' %}
                     </td>
-                    <td class="border-collapse border border-slate-400 px-1">{% if item.todo.is_done == True %}✅{% else %}⌛{% endif %}</td>
-                    <td class="border-collapse border border-slate-400 px-1">{{ item.todo.priority }}</td>
+                    <td class="border-collapse border border-slate-400 px-1">{% if data.todo.is_done == True %}✅{% else %}⌛{% endif %}</td>
+                    <td class="border-collapse border border-slate-400 px-1">{{ data.todo.priority }}</td>
                     <td class="border-collapse border border-slate-400 px-1">
-                        <button data-modal-toggle="d{{ item.todo.id }}" class="btn btn-warning scale-75 del"  name="{{ item.todo.id }}" value="{{ item.todo.id }}">❌</button>
+                        <button data-modal-toggle="d{{ data.todo.id }}" class="btn btn-warning scale-75 del"  name="{{ data.todo.id }}" value="{{ data.todo.id }}">❌</button>
                         {% include './delmodal.html' %}
                     </td>
                     <td class="border-collapse border border-slate-400">
-                        <a href="{% url 'update' item.todo.id %}" data-modal-toggle="f{{ item.todo.id }}" class="btn btn-success scale-75 upd"  name="update" value="{{ item.todo.id }}">✏️</a>
-                        {% comment %}
-                            <div
-                            id="f{{ item.todo.id }}"
-                            tabindex="-1"
-                            class="modal overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center hidden"
-                            aria-hidden="true"
-                            >
-                        {% endcomment %}
-                        {% comment %} {% include './updatemodal.html' %} {% endcomment %}
-                        {% comment %} </div> {% endcomment %}
+                        <a href="{% url 'update' data.todo.id %}" 'data-modal-toggle="u{{ data.todo.id }}"' class="btn btn-success scale-75 upd"  name="update" value="{{ data.todo.id }}">✏️</a>
+                        {% comment %} {% include '/updatemodal.html' %} {% endcomment %}
                     </td>
                 </tr>
             {% endfor %}

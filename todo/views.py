@@ -20,12 +20,11 @@ class app(View):
                 todo = TodoItem.objects.get(pk=id)
                 form = TodoForm(instance=todo)
 
-        data = []
+        datas = []
         todos = TodoItem.objects.all()
         for todo in todos:
-            data.append({'todo': todo, 'form': TodoForm(instance=todo)})
-
-        return render(request, 'todo/table.html', {'form': form, 'data': data})
+            datas.append({'todo': todo, 'form': TodoForm(instance=todo)})
+        return render(request, 'todo/table.html', {'form': form, 'datas': datas})
 
 
     def post(self, request, id=None):
