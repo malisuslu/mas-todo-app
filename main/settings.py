@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from decouple import config
 import django_heroku
@@ -138,3 +139,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
