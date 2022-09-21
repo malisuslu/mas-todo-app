@@ -1,7 +1,7 @@
 from .models import TodoItem
 from django import forms
 from django.db import models
-from todo.models import TodoItem, User
+from todo.models import TodoItem, TodoUser
 from django.contrib.auth.forms import UserCreationForm
 class TodoForm(forms.ModelForm):
     class Meta:
@@ -26,7 +26,8 @@ class TodoForm(forms.ModelForm):
 
 class UserForm(UserCreationForm):
     class Meta:
-        model = User
+        model = TodoUser
+        
         fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'avatar', 'page_url']
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Enter username'}),

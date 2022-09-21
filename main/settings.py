@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import os
 from pathlib import Path
 from decouple import config
 import django_heroku
@@ -128,6 +127,8 @@ SOCIALACCOUNT_PROVIDERS = {
         # For each OAuth based provider, either add a ``SocialApp``
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
+        'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile',
+                  'https://www.googleapis.com/auth/userinfo.email'],
         'APP': {
             'client_id': config('GOOGLE_CLIENT_ID'),
             'secret': config('GOOGLE_CLIENT_SECRET'),
@@ -136,6 +137,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+SOCIALACCOUNT_EMAIL_REQUIRED = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -158,7 +160,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATICFILES_DIRS = [BASE_DIR / 'static',]
 
 LOGIN_URL = 'login' # login is the name of the url
 LOGIN_REDIRECT_URL = 'table' # after login redirect to ....
@@ -180,7 +182,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True # to see the errors in detail on the  terminal
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-AUTH_USER_MODEL = "todo.User"
+AUTH_USER_MODEL = "todo.TodoUser"
 
 SITE_ID = 1 # this is required for allauth to work properly 
 

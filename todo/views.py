@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
 from todo.forms import TodoForm, UserForm
-from todo.models import TodoItem, User
+from todo.models import TodoItem, TodoUser
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.forms import UserCreationForm
