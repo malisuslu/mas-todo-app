@@ -160,7 +160,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # STATICFILES_DIRS = [BASE_DIR / 'static']
 
-LOGIN_URL = 'login'
+# LOGIN_URL = 'login' # login is the name of the url
 LOGIN_REDIRECT_URL = 'table' # after login redirect to ....
 LOGOUT_REDIRECT_URL = 'login' # after logout redirect to ....
 
