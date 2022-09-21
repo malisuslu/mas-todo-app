@@ -11,7 +11,7 @@ class TodoItem(models.Model):
     content = models.TextField()
     is_done = models.BooleanField(default=False)
     priority = models.IntegerField(blank=False, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='todos', blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.priority} - {self.title}"
