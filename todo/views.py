@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from todo.forms import TodoForm
-from todo.models import TodoItem
+from todo.forms import TodoForm, UserForm
+from todo.models import TodoItem, User
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django import forms
+from django.db import models
+
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch') # Don't forget to add (LOGIN_URL = '/login') to settings.py
 class app(View):
     def get(self, request, id=None):
         if id==None:
@@ -21,22 +31,27 @@ class app(View):
                 form = TodoForm(instance=todo)
 
         datas = []
-        todos = TodoItem.objects.all()
+        todos = TodoItem.objects.filter(user=request.user)
         for todo in todos:
             datas.append({'todo': todo, 'form': TodoForm(instance=todo)})
-        return render(request, 'todo/table.html', {'form': form, 'datas': datas})
-
+        return render(request, 'todo/form.html', {'form': form, 'datas': datas})
 
     def post(self, request, id=None):
     
         if id==None:
             form = TodoForm(request.POST)
-            if form.is_valid():
+            form.instance.user = request.user # This line is important to add the user to the todo item when creating it
+            
+            #if priority is already taken for this user, then give an error message
+            if TodoItem.objects.filter(user=request.user, priority=request.POST['priority']).exists():
+                messages.error(request, 'Priority already taken!')
+                return redirect('table')
+
+
+            elif form.is_valid():
                 form.save()
                 messages.success(request, 'Todo item saved successfully')
                 form = TodoForm()
-            else:
-                messages.error(request, 'Todo item not saved')
 
         else:
             todo = TodoItem.objects.get(pk=id)
@@ -45,7 +60,39 @@ class app(View):
                 form.save()
                 messages.success(request, 'Todo item updated successfully')
                 form = TodoForm()
-            else:
-                messages.error(request, 'Todo item not updated')
 
         return redirect('table')
+
+
+# class Register(View):
+#     def get(self, request):
+#         form = UserCreationForm()
+#         return render(request, 'registration/register.html', {'form': form})
+
+#     def post(self, request):
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'User created successfully')
+#             return redirect('login')
+#         else:
+#             messages.error(request, 'User not created')
+#             return redirect('register')
+
+
+# Alternative method with built-in CreateView
+
+
+
+class Register(CreateView):
+    form_class = UserForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
+
+
+    # def form_valid(self, form):
+    #     username = form.cleaned_data.get('username')
+    #     password = form.cleaned_data.get('password')
+    #     user = authenticate(username=username, password=password)
+    #     login(self.request, user)
+    #     return super(Register, self).form_valid(form)

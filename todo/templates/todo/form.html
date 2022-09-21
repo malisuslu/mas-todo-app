@@ -1,19 +1,18 @@
 {% extends './base.html' %}
 {% block form %}
-    <form method="POST" name="todoForm" value="0" class="mt-2 border-4 p-4 bg-slate-400 text-sm md:text-lg text-white font-serif font-extralight italic max-h-fit md:min-h-[400px]">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="flex justify-between">
-          {% url 'table' as table %}
-          {% if request.path == table %}
-          <button type="submit" name="submit" value="" class="btn !bg-green-600 text-white mt-4 bg-inherit">Create</button>
-          {% else %}
-          <button type="submit" name="submit" value="" class="btn !bg-blue-600 text-white mt-4 bg-inherit">Update</button>
-          <a type="submit" href="{% url 'table' %}" name="submit" value="" class="btn bg-teal-400 text-white mt-4 bg-inherit mr-0">Add New</a>
-          {% endif %}
-        </div>
-    </form>
-    {% block table %}{% endblock table %}
+  <form method="POST" name="todoForm" value="0" class="mt-2 mx-auto md:!mx-0 md:!mr-8 border-4 p-4 bg-slate-400 text-sm md:text-lg text-white font-serif font-extralight italic max-h-fit md:min-h-[400px] max-w-sm">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="flex justify-between">
+        {% url 'table' as table %}
+        {% if request.path == table %}
+        <button type="submit" name="submit" value="" class="btn !bg-green-600 text-white mt-4 bg-inherit">Create</button>
+        {% else %}
+        <button type="submit" name="submit" value="" class="btn !bg-blue-600 text-white mt-4 bg-inherit">Update</button>
+        <a type="submit" href="{% url 'table' %}" name="submit" value="" class="btn bg-teal-400 text-white mt-4 bg-inherit mr-0">Add New</a>
+        {% endif %}
+      </div>
+  </form>
 {% endblock form %}
 
 {% block js %}
@@ -56,6 +55,5 @@
       };
     };
   });
-
   </script>
 {% endblock js %}

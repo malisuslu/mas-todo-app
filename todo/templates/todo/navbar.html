@@ -1,0 +1,23 @@
+{% load static %}
+<Nav class="fixed w-full top-0 text-xl text-blue-700 font-extrabold pl-4 pt-2 font-serif">
+    <ul class="flex justify-between content-center">
+        {% if user.is_authenticated %}
+        <li class="mr-4 w-12">
+            <a href={% if user.is_authenticated %} "{% url "table" %}" {% else %} "{% url "login" %}" {% endif %}>
+                {% if user.avatar %}
+                <img class="h-12 rounded-full" src="/media/{{ user.avatar }}" alt="avatar"/>
+                {% else %}
+                <img class="h-12 rounded-full" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="avatar"/>
+                {% endif %}
+            </a>
+        </li>
+            <li class="mr-4">
+                <a href="{% url "logout" %}" class="hover:text-blue-400">
+                    Logout
+                </a>
+            </li>
+        {% else %}
+            {% comment %} <li class="mr-4"><a href="{% url "login" %}">Login</a></li> {% endcomment %}
+        {% endif %}
+    </ul>
+</Nav>

@@ -1,13 +1,11 @@
-{% extends './form.html' %}
-{% block table %}
-<div class="mt-2 md:max-h-[420px] md:max-w-md max-h-56 overflow-auto w-fit md:ml-8">
+<div class="mt-2 mx-auto md:!mx-0 md:max-h-[420px] md:h-fit md:max-w-md min-w-sm max-h-56 overflow-auto w-fit md:!ml-8">
     {% if datas %}
-    <table class="bg-slate-400 md:min-w-full text-sm text-white font-serif font-extralight italic md:w-4/12 text-center border-collapse border border-slate-400 w-full">
+    <table class="bg-slate-400 md:min-w-[384px] text-sm text-white font-serif font-extralight italic md:w-4/12 text-center border-collapse border border-slate-400 w-full h-full">
         <thead>
             <tr>
                 <th class="border-collapse border border-slate-400 px-1">No</th>
                 <th class="border-collapse border border-slate-400 px-1">Title</th>
-                <th class="border-collapse border border-slate-400 px-1">Content</th>
+                <th class="border-collapse border border-slate-400 px-1 ">Content</th>
                 <th class="border-collapse border border-slate-400 px-1">Is done?</th>
                 <th class="border-collapse border border-slate-400 px-1">Pr.</th>
                 <th class="border-collapse border border-slate-400 px-1">Del.</th>
@@ -39,4 +37,3 @@
     </table>
     {% endif %}
 </div>
-{% endblock table %}
