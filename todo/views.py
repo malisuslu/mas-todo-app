@@ -9,8 +9,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django import forms
-from django.db import models
 
 
 # Create your views here.
@@ -87,12 +85,11 @@ class app(View):
 class Register(CreateView):
     form_class = UserForm
     template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('table')
 
-
-    # def form_valid(self, form):
-    #     username = form.cleaned_data.get('username')
-    #     password = form.cleaned_data.get('password')
-    #     user = authenticate(username=username, password=password)
-    #     login(self.request, user)
-    #     return super(Register, self).form_valid(form)
+    def form_valid(self, form):
+        valid = super(Register, self).form_valid(form)
+        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+        new_user = authenticate(username=username, password=password)
+        login(self.request, new_user)
+        return valid
