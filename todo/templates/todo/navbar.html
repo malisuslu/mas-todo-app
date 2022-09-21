@@ -3,7 +3,7 @@
         {% if user.is_authenticated %}
         <li class="mr-4 w-12">
                 {% if user.avatar %}
-                {% comment %} <img class="h-12 rounded-full" src="/media/{{ user.avatar }}" alt="avatar"/> {% endcomment %}
+                <img class="h-12 rounded-full" src="/media/{{ user.avatar }}" alt="avatar"/>
                 {% else %}
                 <img class="h-12 rounded-full" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="avatar"/>
                 {% endif %}

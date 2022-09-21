@@ -19,7 +19,7 @@
                 {{ form|crispy }}
                 <div class="flex items-center justify-between">
                     <input type="submit" value="Login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    <a href="{% provider_login_url 'google' method = 'post' %}">Google</a>
+                    <a href="{% provider_login_url 'google' method = 'auth2' %}"><img src="{% static 'todo/images/google.png' %}" alt="google" class="w-10 h-10"></a> 
                 </div>
                 
             <h2 class="font-serif text-md text-purple-500 pt-4 ">
