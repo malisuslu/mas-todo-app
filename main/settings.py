@@ -175,15 +175,15 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 DEBUG_PROPAGATE_EXCEPTIONS = True # to see the errors in detail on the  terminal when DEBUG = False
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
 
 AUTH_USER_MODEL = "todo.TodoUser"
 
-SITE_ID = 1 # this is required for allauth to work properly 
+SITE_ID = 2 # this is required for allauth to work properly 
 
 SOCIALACCOUNT_LOGIN_ON_GET=True # To skip the login page and go directly to the provider's login page when the user clicks the login button on google provider.
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
