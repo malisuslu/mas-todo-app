@@ -33,13 +33,13 @@ ALLOWED_HOSTS = ['mas-todo-app.herokuapp.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'todo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'todo',
     'django_browser_reload',
     "crispy_forms",
     "crispy_tailwind",
@@ -67,7 +67,9 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates', # necessary to use built-in custom templates 
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -163,8 +165,17 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # STATICFILES_DIRS = [BASE_DIR / 'static',]
 
 LOGIN_URL = 'login' # login is the name of the url
+PASSWORD_RESET_URL = 'password_reset'
 LOGIN_REDIRECT_URL = 'table' # after login redirect to ....
 LOGOUT_REDIRECT_URL = 'login' # after logout redirect to ....
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'PASSWORD RESET TODO-APP SERVICE <{}>'.format(EMAIL_HOST_USER)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

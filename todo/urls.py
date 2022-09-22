@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from .views import app, Register
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', app.as_view(), name='table'),
