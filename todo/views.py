@@ -54,7 +54,13 @@ class app(View):
         else:
             todo = TodoItem.objects.get(pk=id)
             form = TodoForm(request.POST, instance=todo)
-            if form.is_valid():
+
+            #if priority is already taken for this user, then give an error message
+            if TodoItem.objects.filter(user=request.user, priority=request.POST['priority']).exists():
+                messages.error(request, 'Priority already taken!')
+                return redirect('table')
+
+            elif form.is_valid():
                 form.save()
                 messages.success(request, 'Todo item updated successfully')
                 form = TodoForm()
