@@ -188,9 +188,9 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 
 DEBUG_PROPAGATE_EXCEPTIONS = True # to see the errors in detail on the  terminal when DEBUG = False
 
-AUTH_USER_MODEL = "todo.TodoUser"
+AUTH_USER_MODEL = "todo.TodoUser" # to use custom user model
 
-SITE_ID = 2 # this is required for allauth to work properly 
+SITE_ID = 2 # set 1 on development and 2 on production
 
 SOCIALACCOUNT_LOGIN_ON_GET=True # To skip the login page and go directly to the provider's login page when the user clicks the login button on google provider.
 

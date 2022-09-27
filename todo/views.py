@@ -20,13 +20,21 @@ class app(View):
         else:
             if request.path == '/delete/'+str(id):
                 todo = TodoItem.objects.get(pk=id)
-                todo.delete()
-                messages.success(request, 'Todo item deleted successfully!')
-                return redirect('table')
+                if todo.user_id == request.user.id:
+                    todo.delete()
+                    messages.success(request, 'Todo item deleted successfully')
+                    return redirect('table')
+                else:
+                    messages.error(request, 'You are not authorized to delete this item')
+                    return redirect('table')
 
             elif request.path == '/update/'+str(id):
                 todo = TodoItem.objects.get(pk=id)
-                form = TodoForm(instance=todo)
+                if todo.user_id == request.user.id:
+                    form = TodoForm(instance=todo)
+                else:
+                    messages.error(request, 'You are not allowed to update this todo item')
+                    return redirect('table')
 
         datas = []
         todos = TodoItem.objects.filter(user=request.user)
@@ -70,11 +78,11 @@ class app(View):
 
 # class Register(View):
 #     def get(self, request):
-#         form = UserCreationForm()
+#         form = UserForm()
 #         return render(request, 'registration/register.html', {'form': form})
 
 #     def post(self, request):
-#         form = UserCreationForm(request.POST)
+#         form = UserForm(request.POST)
 #         if form.is_valid():
 #             form.save()
 #             messages.success(request, 'User created successfully')
@@ -85,9 +93,6 @@ class app(View):
 
 
 # Alternative method with built-in CreateView
-
-
-
 class Register(CreateView):
     form_class = UserForm
     template_name = 'registration/register.html'
@@ -99,3 +104,14 @@ class Register(CreateView):
         new_user = authenticate(username=username, password=password)
         login(self.request, new_user)
         return valid
+
+class Update(UpdateView):
+    model = TodoItem
+    form_class = TodoForm
+    template_name = 'todo/update.html'
+    success_url = reverse_lazy('table')
+
+class Delete(DeleteView):
+    model = TodoItem
+    template_name = 'todo/delete.html'
+    success_url = reverse_lazy('table')
