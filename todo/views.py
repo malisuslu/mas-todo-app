@@ -105,13 +105,44 @@ class Register(CreateView):
         login(self.request, new_user)
         return valid
 
-class Update(UpdateView):
-    model = TodoItem
-    form_class = TodoForm
-    template_name = 'todo/update.html'
-    success_url = reverse_lazy('table')
+# class UpdateUser(UpdateView):
+#     form_class = UserForm
+#     template_name = 'registration/update.html'
+#     success_url = reverse_lazy('table')
 
-class Delete(DeleteView):
-    model = TodoItem
-    template_name = 'todo/delete.html'
-    success_url = reverse_lazy('table')
+#     def get_object(self):
+#         return TodoUser.objects.get(pk=self.kwargs['id'])
+
+# class DeleteUser(DeleteView):
+#     model = TodoUser
+#     template_name = 'registration/register.html'
+#     success_url = reverse_lazy('table')
+
+
+
+# class Update(UpdateView):
+#     model = TodoItem
+#     form_class = TodoForm
+#     template_name = 'todo/update.html'
+#     success_url = reverse_lazy('table')
+
+#     def get(self, request, *args, **kwargs):
+#         todo = TodoItem.objects.get(pk=kwargs['pk'])
+#         if todo.user_id == request.user.id:
+#             return super(Update, self).get(request, *args, **kwargs)
+#         else:
+#             messages.error(request, 'You are not allowed to update this todo item')
+#             return redirect('table')
+
+# class Delete(DeleteView):
+#     model = TodoItem
+#     template_name = 'todo/delete.html'
+#     success_url = reverse_lazy('table')
+
+#     def get(self, request, *args, **kwargs):
+#         todo = TodoItem.objects.get(pk=kwargs['pk'])
+#         if todo.user_id == request.user.id:
+#             return super(Delete, self).get(request, *args, **kwargs)
+#         else:
+#             messages.error(request, 'You are not allowed to delete this todo item')
+#             return redirect('table')

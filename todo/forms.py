@@ -1,3 +1,4 @@
+from cProfile import label
 from .models import TodoItem
 from django import forms
 from django.db import models
@@ -7,6 +8,7 @@ class TodoForm(forms.ModelForm):
     class Meta:
         model = TodoItem
         fields = ['title', 'content', 'priority', 'is_done']
+        # labels = {'title': 'Title', 'content': 'Content', 'priority': 'Priority', 'is_done': 'Done'} # to change the label of the fields
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control rounded-4', 'placeholder': 'Enter title'}),
             'content': forms.Textarea(attrs={'class': 'form-control rounded-4 resize-none', 'rows': 4, 'placeholder': 'Enter Todo content'}),

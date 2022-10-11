@@ -1,4 +1,3 @@
-from django.db.models.signals import pre_save
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
@@ -9,7 +8,7 @@ class TodoUser(AbstractUser):
     page_url = models.URLField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.username} - {self.email}"
+        return f"{self.id} - {self.username} - {self.email}"
 
 class TodoItem(models.Model):
     title = models.CharField(max_length=100)
