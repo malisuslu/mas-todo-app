@@ -5,7 +5,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://mas-todo-app.herokuapp.com/">
+    <a href="https://malisuslu.pythonanywhere.com/">
       Demo
     </a>
      | 
@@ -57,7 +57,7 @@ $ git clone git@github.com:malisuslu/mas-todo-app.git
     $ source env/bin/activate (for macOs/linux OS)
     $ pip install -r requirements.txt
     
-# open the file "../mas-todo-app/main/settings.py" and change the "SITE_ID" value from "2" to "1"
+# open the file "../mas-todo-app/main/settings.py", change the "SITE_ID" value from "2" to "1" and change the DEBUG value from "False" to "True" and save the file.
     
 # Create ".env" file in the main directory "../mas-todo-app/"
 # Add "SECRET_KEY" in .env file
