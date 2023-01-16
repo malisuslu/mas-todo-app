@@ -56,8 +56,12 @@ $ git clone git@github.com:malisuslu/mas-todo-app.git
     > env/Scripts/activate (for win OS)
     $ source env/bin/activate (for macOs/linux OS)
     $ pip install -r requirements.txt
-# Edit .backend.env to .env
-# Add SECRET_KEY in .env file
+    
+# open the file "../mas-todo-app/main/settings.py" and change the "SITE_ID" value from "2" to "1"
+    
+# Create ".env" file in the main directory "../mas-todo-app/"
+# Add "SECRET_KEY" in .env file
+# In order to use Google Authentication service you must also add some valid "GOOGLE_CLIENT_ID" and "GOOGLE_CLIENT_SECRET"
 
 # Run the app
     $ python manage.py runserver
