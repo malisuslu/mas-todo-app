@@ -21,7 +21,6 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Overview](#overview)
   - [Built With](#built-with)
 - [How To Use](#how-to-use)
 - [Acknowledgements](#acknowledgements)
@@ -29,9 +28,9 @@
 
 <!-- OVERVIEW -->
 
-## Overview
+<!-- ## Overview
 
-![screenshot](todo.PNG)
+![screenshot](todo.PNG) -->
 
 ### Built With
 
@@ -41,6 +40,7 @@
 - CSS
 - JS
 - Django
+- Tailwind CSS
 
 ## How To Use
 
@@ -49,7 +49,7 @@
 To clone and run this application, you'll need [Git](https://git-scm.com) 
 ```bash
 # Clone this repository
-$ git clone git@github.com:malisuslu/mas-todo-app.git
+$ git clone https://github.com/malisuslu/mas-todo-app.git
 
 # Install dependencies
     $ python -m venv env
@@ -68,9 +68,9 @@ $ git clone git@github.com:malisuslu/mas-todo-app.git
 ```
 
 ## Acknowledgements
-- Information for your projects
+- This is a simple ToDo App with Django. You can create and manage your account. You can add, delete and update your tasks. You can also use Google Authentication service to login. 
 
 ## Contact
 
 - GitHub [@malisuslu](https://github.com/malisuslu)
-- Linkedin [@malisuslu](https://www.linkedin.com/in/muhammed-ali-s%C3%BCsl%C3%BC/)
+- Linkedin [@malisuslu](https://www.linkedin.com/in/malisuslu/)
